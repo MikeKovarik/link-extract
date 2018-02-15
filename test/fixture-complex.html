@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+	<meta charset="UTF-8">
+	<title>css/app.css</title>
+
+	<link rel="icon" 
+		type="image/png"
+		href="http://example.com/myicon.png">
+	<link rel="manifest" href="manifest.json">
+	<link rel="import" href="paper-tabs.html">
+	<link rel="icon" sizes="192x192" href="nice-highres.png">
+	<link rel="icon" sizes="128x128" href="niceicon.png">
+	<link rel="apple-touch-icon" sizes="128x128" href="niceicon2.png">
+	<link rel="apple-touch-icon-precomposed"
+		  sizes="128x128"
+		  href="niceicon3.png">
+
+	<link rel='stylesheet' type='text/css' href='../flexus/flexus-neon.css'>
+	<link rel="stylesheet" type="text/css" href="/neon-icons.css">
+	<link rel="stylesheet" type="text/css" href="fixture-complex.css" />
+	<link rel="stylesheet"
+		  type="text/css"
+		  href="css/flexus-lite.css" />
+
+	<style>
+		body {
+			background-image: url('/img/embeded-something.png')
+		}
+		div {
+			background-image: url(./embeded-something-else.jpg)
+		}
+	</style>
+
+</head>
+<body dark>
+
+
+	<div id="drop-overlay" layout vertical center fit
+	style="background-image: url('/inlined-style.png')">
+		<img id="folde" src="folder.svg">
+		<h2>Drop the photos in here</h2>
+		<i icon="folder"></i>
+		<img src="my-photo.jpg">
+	</div>
+
+	<flexus-view id="content">
+		<main style='background-image: url(./another-inline.jpg)'>
+			<h3>No files selected</h3>
+			<input id="inputfile" type="file" mutliple>
+			<button id="convert">convert</button>
+			<h3>Options</h3>
+			<p>
+				<label>Format</label>
+				<select>
+					<option>jpg</option>
+					<option>png</option>
+					<option>gif</option>
+				</select>
+			</p>
+			<p><a href="./some-random-link.html"></a></p>
+		</main>
+		<!--div class="bottom-bar" layout>
+			<div class="foo"></div>
+			<div class="foo"></div>
+			<div class="foo"></div>
+			<div class="foo"></div>
+		</div-->
+	</flexus-view>
+
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.4/lodash.js"></script>
+	<script src="//code.jquery.com/pep/0.4.3/pep.min.js"></script>
+
+	<script src="../uwp-fs/index.js"></script>
+	<script src="./node_modules/pics/index.js"></script>
+	<script src='/node_modules_bundled/jpg-stream.js'></script>
+	<!--
+	<script src="../fachman/index.js"></script>
+	<script src="node_modules/fachman/index.js"></script>
+	-->
+	<script src="runtime.js"></script>
+	<script src="./fixture-complex.mjs" type="module"></script>
+
+	<script type="module">
+		import(`./something.mjs`)
+			.then(ns => {
+				// something
+			})
+		import(`./pages/${page}.js`)
+			.then(ns => {
+				// something
+			})
+	</script>
+
+</body>
+</html>

@@ -1,0 +1,24 @@
+@font-face {
+	font-family: "FooBar";
+	src: url("/fonts/foo.woff2") format("woff2"),
+		url('./fonts/bar.woff') format("woff");
+}
+body {
+	background-image: url('baz.png');
+}
+#logo .bg {
+	background-image: url('img/quox.jpg');
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	background-position: left top;
+	transition: background-position 80s linear;
+}
+/*
+#logo {
+	background-image: url('/img/hidden4.png')
+	-webkit-mask-image: url(img/hiden5.png);
+}
+*/

@@ -1,0 +1,55 @@
+@import url("a.css") print;
+@import url(./b.css) projection, tv;
+@import 'c.css';
+@import "/d.css" screen, projection;
+@import url('e.css') screen and (orientation:landscape);
+@import 'fixture-simple.css';
+
+
+@font-face {
+	font-family: "Open Sans";
+	src: url("/fonts/OpenSans-Regular-webfont.woff2") format("woff2"),
+		url( './fonts/OpenSans-Regular-webfont.woff' ) format("woff");
+}
+body {
+	background-image: url('something - Copy (2).png');
+}
+#logo {
+	background-image: url(./img/something.jpg)
+	background-repeat: repeat;
+	-webkit-mask-image: url( /img/logo-large.png );
+	mask-image: url("./img/logo's mask (big).png");
+	-webkit-mask-size: contain;
+	mask-size: contain;
+	-webkit-mask-repeat: no-repeat;
+	mask-repeat: no-repeat;
+	width: 40%;
+	padding-top: 25%;
+	overflow: hidden;
+	background-color: #000;
+	position: relative;
+}
+	#logo .bg {
+		background-image: url('img/logo-bg.jpg');
+		position: absolute;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		background-position: left top;
+		transition: background-position 80s linear;
+	}
+/*
+@font-face {
+	font-family: "Open Sans";
+	src: url("hidden1.woff2") format("woff2"),
+		url("hidden2.woff") format("woff");
+}
+body {
+	background-image: url(./img/hidden3.jpg)
+}
+#logo {
+	background-image: url('/img/hidden4.png')
+	-webkit-mask-image: url(img/hiden5.png);
+}
+*/
