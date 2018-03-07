@@ -1,7 +1,7 @@
 (function (global, factory) {
 	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('path'), require('fs'), require('util')) :
 	typeof define === 'function' && define.amd ? define(['exports', 'path', 'fs', 'util'], factory) :
-	(factory((global['link-extractor'] = {}),global.path,global.fs,global.util));
+	(factory((global['link-extract'] = {}),global.path,global.fs,global.util));
 }(this, (function (exports,path,fs,util) { 'use strict';
 
 path = path && path.hasOwnProperty('default') ? path['default'] : path;
@@ -14,7 +14,6 @@ var readFile = promisify(fs.readFile);
 
 
 var defaultOptions = {
-	recursive: false,
 	order: ['css', 'esm', 'js', 'json', 'html', 'images', 'fonts', 'video', 'audio', 'other'],
 	// include src and hrefs from <link> <meta> <script> and css and js source codes
 	includeJs: true,
@@ -75,7 +74,11 @@ function filterUrlsByExtension(array, urlLists, options) {
 		filterUrlByExtension(array[i], urlLists, options);
 }
 function filterUrlByExtension(url, urlLists, options) {
-	switch(getExtension(url)) {
+	var temp = url;
+	var queryIndex = temp.indexOf('?');
+	if (queryIndex !== -1)
+		temp = temp.slice(0, queryIndex);
+	switch(getExtension(temp)) {
 		case 'mjs':
 			if (options.includeJs)
 				urlLists.esm.push(url);
@@ -186,18 +189,15 @@ function parseHtml(code, options) {
 	// todo <img>, <a>, srcset, <picture> <div style="...">
 	if (options.includeAssets) {
 		// TODO: some filtering maybe? asking for includeImages
-		getMatches(code, /(<img.*src|<a.*href)="(.*?)"/gm, 2)
-			.filter(name => !name.endsWith('.html'))
+		getMatches(code, /<(?!script).*(src|srcset)="(.*?)"/gm, 2)
 			.forEach(assignUrl);
 	}
 
-	if (options.recursive) {
-	} else {
-		var orderedLists = options.order.map(name => urlLists[name]);
-		return flatten(orderedLists)
-			.map(trim)
-			.filter(exists)
-	}
+
+	var orderedLists = options.order.map(name => urlLists[name]);
+	return flatten(orderedLists)
+		.map(trim)
+		.filter(exists)
 }
 
 // NOTE: does not include .map files because those aren't downloaded by normal visitors unless dev tools are open
@@ -250,7 +250,6 @@ function removeJsComments(code) {
 function removeHtmlComments(code) {
 	return code.replace(/<!--[\s\S]*?-->/gm, '')
 }
-
 
 function getMatches(code, regex, index) {
 	if (index === undefined) {

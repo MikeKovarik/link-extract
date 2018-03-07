@@ -1,8 +1,7 @@
 {
   "name": "link-extract",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Extracts URLs and links from HTML tags, CSS properties and JS imports.",
-  "main": "index.js",
   "scripts": {
     "build": "rollup -c",
     "dev": "rollup -c -w"

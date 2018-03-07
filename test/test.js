@@ -68,6 +68,27 @@ describe('.parseHtml', () => {
 		assert.deepEqual(urls, expected)
 	})
 
+	it('iframe', async () => {
+		var code = await readFile('fixture-iframe.html')
+		var urls = parseHtml(code.toString())
+		var expected = [
+			// css
+			'flexus/flexus-neon.css?v1.0.0',
+			'flexus/flexus-neon-icons.css',
+			'style/style.css',
+			'./style/notfound.css',
+			// js
+			'./js/index.js',
+			// html
+			'frame.html?some=query',
+			// content
+			'img/bg.jpg',
+			'img/pattern.png',
+			'./img/img.png',
+		]
+		assert.deepEqual(urls, expected)
+	})
+
 })
 
 
@@ -103,6 +124,15 @@ describe('.parseCss', () => {
 			'/img/logo-large.png',
 			`./img/logo's mask (big).png`,
 			'img/logo-bg.jpg',
+		]
+		assert.deepEqual(urls, expected)
+	})
+
+	it('fonts', async () => {
+		var code = await readFile('fixture-fonts.css')
+		var urls = parseCss(code.toString())
+		var expected = [
+			'MaterialIcons-Regular.woff',
 		]
 		assert.deepEqual(urls, expected)
 	})
